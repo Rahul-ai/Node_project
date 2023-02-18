@@ -7,7 +7,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router)=>{
     router.get("/", repo.fetchAll);
     router.post("/", repo.create);
     router.put("/:id", repo.update);
-    router.post("/withPagination",repo.withPagination)
+    router.post("/withPagination",repo.withPagination);
 
     return router
 }
