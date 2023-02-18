@@ -61,6 +61,24 @@ class GRepo
          res.status(500).json(e);
       }
    }
+   
+   public async withPagination(req: Request, res: Response) {
+      try {
+         const repo = await db.getRepository(entity);
+         const data = await repo.findAndCount({
+            order:{
+               id :'DESC'
+            },
+            skip: (req.body.limit * req.body.page) - req.body.limit,
+            take: req.body.limit,
+         });
+         res.status(200).json(data);
+      }
+      catch (e) {
+         console.log(await db.manager.softDelete(entity,{id: req.params.id}));
+         res.status(500).json(e);
+      }
+   }
 }
 return new GRepo();
 }
