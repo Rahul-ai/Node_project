@@ -15,7 +15,7 @@ class GRepo
       }
    }
 
-   public async getById(req: Request, res: Response) {
+   public async  getById(req: Request, res: Response) {
       try {
          const data = await db.manager.findOneBy(entity, {id : req.params.id});
          res.status(200).json(data);
