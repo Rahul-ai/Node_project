@@ -61,7 +61,7 @@ class GRepo
          res.status(500).json(e);
       }
    }
-   
+
    public async withPagination(req: Request, res: Response) {
       try {
          const repo = await db.getRepository(entity);
@@ -78,6 +78,12 @@ class GRepo
          console.log(await db.manager.softDelete(entity,{id: req.params.id}));
          res.status(500).json(e);
       }
+   }
+
+
+   // not handel Request and Response
+   public async choiceSelect(where:{},select:{},relations=null){
+      return await db.getRepository(entity).find({ where,select,relations });
    }
 }
 return new GRepo();
