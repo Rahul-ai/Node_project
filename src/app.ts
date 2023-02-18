@@ -22,7 +22,7 @@ app.use(morgan('tiny'));
 const { upload, multiUpload } = require('./MiddelWare/fileUpload/FileUpload');
 
 // Inbuild MiddelWare
-app.use('/Images',express.static('Images'));
+app.use('/Images',express.static('src/Images'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
  
@@ -31,8 +31,7 @@ app.use("/User",usercontroller);
 app.use("/Post",PostController);
 
 // Common function
-app.post("/upload", upload.single('file'), (req:Request,res:Response) =>{
-   console.log(req.file)
+app.post("/upload", upload.single('file'), (req:Request,res:Response)=>{
     res.json({path:`${config.Api}/${req.file?.path}`});
 });
 
