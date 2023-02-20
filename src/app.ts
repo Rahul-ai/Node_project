@@ -1,4 +1,6 @@
-import express, { Application, Express, Request, Response } from "express";
+import express, { Application } from "express";
+import { CRequest } from "./EntityInterfaces/Request";
+import { CResponse } from "./EntityInterfaces/Response";
 import { auth } from "./MiddelWare/Auth/Auth";
 
 const jwt = require("jsonwebtoken");
@@ -34,11 +36,11 @@ app.use("/User", usercontroller);
 app.use("/Post", PostController);
 
 // Common function
-app.post("/upload", upload.single("file"), (req: Request, res: Response) => {
+app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {
   res.json({ path: `${config.Api}/${req.file?.path}` });
 });
 
-app.post("/login", (req: Request, res: Response) => {
+app.post("/login", (req: CRequest, res: CResponse) => {
   const user = {
     id: 1,
     username: "rt878777@gmail.com",
@@ -49,7 +51,7 @@ app.post("/login", (req: Request, res: Response) => {
 });
 
 // if request not found
-app.all("*", (req: Request, res: Response) => {
+app.all("*", (req: CRequest, res: CResponse) => {
   res.status(404).json({ message: "Resource Not Found" });
 });
 

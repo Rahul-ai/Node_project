@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
-export interface Responses extends Response{
+export interface CResponse extends Response{
 }

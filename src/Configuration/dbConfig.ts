@@ -1,7 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Post } from "../Entity/Post";
-import { User } from "../Entity/User";
+import { Post } from "../Entity/User/Post";
+import { User } from "../Entity/User/User";
+
 
  let options = new DataSource({
     type: "mysql",
@@ -12,7 +13,7 @@ import { User } from "../Entity/User";
     database: "test",
     synchronize: true,
     logging: false, 
-    entities: [User, Post],
+    entities: ["src/Entity/**/*.ts"],
     subscribers: [],
     migrations: [],
 });

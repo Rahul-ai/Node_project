@@ -1,12 +1,12 @@
 import { EntityTarget} from "typeorm";
-import { Requests } from "../EntityInterfaces/Request";
-import { Responses } from "../EntityInterfaces/Response";
+import { CRequest } from "../EntityInterfaces/Request";
+import { CResponse } from "../EntityInterfaces/Response";
 const {db} = require('../Configuration/dbConfig');
 
 export const GenericDomainService = <T>(entity: EntityTarget<T>)=>{
 class GRepo
 {
-   public async fetchAll(req: Requests, res: Responses) {
+   public async fetchAll(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.find(entity);
          res.status(200).json(data);
@@ -16,7 +16,7 @@ class GRepo
       }
    }
 
-   public async getById(req:Requests, res:Responses) {
+   public async getById(req:CRequest, res:CResponse) {
       try {
          console.log(req.user)
          const data = await db.manager.findOneBy(entity, {id : req.params.id});
@@ -27,7 +27,7 @@ class GRepo
       }
    }
 
-   public async create(req: Requests, res: Responses) {
+   public async create(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.create(entity, req.body);
          await db.manager.save(data);
@@ -38,7 +38,7 @@ class GRepo
       }
    }
 
-   public async update(req: Requests, res: Responses) {
+   public async update(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.update(entity,{id: req.params.id}, req.body);
          // await db.manager.save(data);
@@ -54,7 +54,7 @@ class GRepo
       }
    }
 
-   public async Delete(req: Requests, res: Responses) {
+   public async Delete(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.update(entity,{id: req.params.id}, req.body);
          res.status(200).json(data);
@@ -64,7 +64,7 @@ class GRepo
       }
    }
 
-   public async withPagination(req: Requests, res: Responses) {
+   public async withPagination(req: CRequest, res: CResponse) {
       try {
          const repo = await db.getRepository(entity);
          const data = await repo.findAndCount({

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
 
-export interface Requests extends Request{
+export interface CRequest extends Request{
     user : {}
 }
