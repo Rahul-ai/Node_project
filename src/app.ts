@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Assign Controllers
-app.use("/User", auth, usercontroller);
+app.use("/User", usercontroller);
 app.use("/Post", PostController);
 
 // Common function
