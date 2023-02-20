@@ -1,6 +1,6 @@
 import express from "express";
 import { controllerService } from "../ControllerService/ControllerService";
-import { User } from "../entity/User";
+import { User } from "../Entity/User";
 import { GenericDomainService } from "../GenericRepo/GRepo";
 
 const router = express.Router();

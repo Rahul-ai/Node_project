@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Post } from "../entity/Post";
-import { User } from "../entity/User";
+import { Post } from "../Entity/Post";
+import { User } from "../Entity/User";
 
  let options = new DataSource({
     type: "mysql",
