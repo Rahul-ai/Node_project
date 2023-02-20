@@ -1,11 +1,12 @@
 import { EntityTarget} from "typeorm";
-import { Request,Response } from "express";
+import { Requests } from "../EntityInterfaces/Request";
+import { Responses } from "../EntityInterfaces/Response";
 const {db} = require('../Configuration/dbConfig');
 
 export const GenericDomainService = <T>(entity: EntityTarget<T>)=>{
 class GRepo
 {
-   public async fetchAll(req: Request, res: Response) {
+   public async fetchAll(req: Requests, res: Responses) {
       try {
          const data = await db.manager.find(entity);
          res.status(200).json(data);
@@ -15,8 +16,9 @@ class GRepo
       }
    }
 
-   public async  getById(req: Request, res: Response) {
+   public async getById(req:Requests, res:Responses) {
       try {
+         console.log(req.user)
          const data = await db.manager.findOneBy(entity, {id : req.params.id});
          res.status(200).json(data);
       }
@@ -25,7 +27,7 @@ class GRepo
       }
    }
 
-   public async create(req: Request, res: Response) {
+   public async create(req: Requests, res: Responses) {
       try {
          const data = await db.manager.create(entity, req.body);
          await db.manager.save(data);
@@ -36,7 +38,7 @@ class GRepo
       }
    }
 
-   public async update(req: Request, res: Response) {
+   public async update(req: Requests, res: Responses) {
       try {
          const data = await db.manager.update(entity,{id: req.params.id}, req.body);
          // await db.manager.save(data);
@@ -52,7 +54,7 @@ class GRepo
       }
    }
 
-   public async Delete(req: Request, res: Response) {
+   public async Delete(req: Requests, res: Responses) {
       try {
          const data = await db.manager.update(entity,{id: req.params.id}, req.body);
          res.status(200).json(data);
@@ -62,7 +64,7 @@ class GRepo
       }
    }
 
-   public async withPagination(req: Request, res: Response) {
+   public async withPagination(req: Requests, res: Responses) {
       try {
          const repo = await db.getRepository(entity);
          const data = await repo.findAndCount({
