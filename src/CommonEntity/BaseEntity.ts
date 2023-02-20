@@ -2,7 +2,7 @@ import { BaseEntity, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn,
 
 export class BaseClass{
    @PrimaryGeneratedColumn()
-   id: string
+   id: number
 
    @CreateDateColumn()
    createdAt?:Date 

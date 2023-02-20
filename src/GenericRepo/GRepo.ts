@@ -1,11 +1,13 @@
 import { EntityTarget} from "typeorm";
 import { CRequest } from "../EntityInterfaces/Request";
 import { CResponse } from "../EntityInterfaces/Response";
-const {db} = require('../Configuration/dbConfig');
+import { db } from "../Configuration/dbConfig";
+import { BaseInterface } from "../EntityInterfaces/BaseInterface";
 
-export const GenericDomainService = <T>(entity: EntityTarget<T>)=>{
+export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface>)=>{
 class GRepo
 {
+   private 
    public async fetchAll(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.find(entity);
@@ -19,7 +21,7 @@ class GRepo
    public async getById(req:CRequest, res:CResponse) {
       try {
          console.log(req.user)
-         const data = await db.manager.findOneBy(entity, {id : req.params.id});
+         const data = await db.manager.findOneBy(entity, {id : Number(req.params.id)});
          res.status(200).json(data);
       }
       catch (e) {
@@ -56,7 +58,18 @@ class GRepo
 
    public async Delete(req: CRequest, res: CResponse) {
       try {
-         const data = await db.manager.update(entity,{id: req.params.id}, req.body);
+         const data = await db.manager.softDelete(entity,{id: req.params.id});
+         res.status(200).json(data);
+      }
+      catch (e) {
+         res.status(500).json(e);
+      }
+   }
+
+   public async AllDeleted(req: CRequest, res: CResponse) {
+      try {
+         const repo = await db.getRepository(entity);
+         const data = await repo.find();
          res.status(200).json(data);
       }
       catch (e) {
@@ -77,7 +90,7 @@ class GRepo
          res.status(200).json(data);
       }
       catch (e) {
-         console.log(await db.manager.softDelete(entity,{id: req.params.id}));
+         console.log();
          res.status(500).json(e);
       }
    }

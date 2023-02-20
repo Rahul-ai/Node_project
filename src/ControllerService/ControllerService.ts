@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { EntityTarget } from "typeorm";
-import { BaseInterface } from "../EntityInterfaces/BaseInterface";
 import { GenericDomainService } from "../GenericRepo/GRepo";
 
 export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{

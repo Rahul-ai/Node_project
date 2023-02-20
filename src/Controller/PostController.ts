@@ -6,16 +6,20 @@ import { Post } from "../Entity/User/Post";
 import { GenericDomainService } from "../GenericRepo/GRepo";
 
 const router = express.Router();
-const repo = GenericDomainService(Post)
+const repo = GenericDomainService(Post);
 
-router.get("/coustomGet",async(req:CRequest,res:CResponse)=>{
-    const where :Partial<Post> = {id:`1`};
-    const select = { post:true, withDeleted:true }; 
-    const data = await repo.choiceSelect(where,select);
-    await res.status(200).json(data);
+router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
+    try {
+        const where = { id:1 };
+        const select = { post: true };
+        const data = await repo.choiceSelect(where, select);
+        await res.status(200).json(data);
+    } catch (err) {
+        res.status(500).json({err:"someThing wrong"});
+    }
 });
 
 // common crud Operation
-controllerService(Post,router);
+controllerService(Post, router);
 
 module.exports = router;

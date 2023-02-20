@@ -1,3 +1,3 @@
 export interface BaseInterface{
-    id: string
+    id: number
 } 
