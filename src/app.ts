@@ -1,4 +1,5 @@
 import express , { Application, Express, Request, Response } from "express";
+import { auth } from "./MiddelWare/Auth/Auth";
 const app:Application = express();
 
 // Lib For Log
@@ -27,7 +28,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
  
 // Assign Controllers
-app.use("/User",usercontroller);
+app.use("/User",auth,usercontroller);
 app.use("/Post",PostController);
 
 // Common function

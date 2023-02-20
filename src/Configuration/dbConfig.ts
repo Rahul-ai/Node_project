@@ -11,7 +11,7 @@ import { User } from "../entity/User";
     password: "Password@123",
     database: "test",
     synchronize: true,
-    logging: true,
+    logging: false, 
     entities: [User, Post],
     subscribers: [],
     migrations: [],
