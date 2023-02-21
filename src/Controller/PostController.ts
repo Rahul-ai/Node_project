@@ -4,6 +4,7 @@ import { CResponse } from "../EntityInterfaces/Response";
 import { controllerService } from "../ControllerService/ControllerService";
 import { Post } from "../Entity/User/Post";
 import { GenericDomainService } from "../GenericRepo/GRepo";
+import { User } from "../Entity/User/User";
 
 const router = express.Router();
 const repo = GenericDomainService(Post);
