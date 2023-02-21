@@ -27,7 +27,7 @@ app.use(morgan("tiny"));
 const { upload, multiUpload } = require("./MiddelWare/fileUpload/FileUpload");
 
 // Inbuild MiddelWare
-app.use("/Images", express.static("src/Images"));
+app.use("/src/Images", express.static("src/Images"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
