@@ -9,7 +9,8 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     router.delete("/:id", repo.Delete)
     router.get("/", repo.fetchAll);
     router.post("/", repo.create);
-    router.put("/:id", repo.update);
+    router.put("/:id", repo.update);   
+    router.get("/getAllDelete", repo.getAllDeleted); 
     router.post("/withPagination",repo.withPagination);
 
     return router;

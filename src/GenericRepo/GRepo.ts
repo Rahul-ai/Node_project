@@ -1,4 +1,4 @@
-import { EntityTarget} from "typeorm";
+import { EntityTarget, FindManyOptions, IsNull, Not} from "typeorm";
 import { CRequest } from "../EntityInterfaces/Request";
 import { CResponse } from "../EntityInterfaces/Response";
 import { db } from "../Configuration/dbConfig";
@@ -66,10 +66,15 @@ class GRepo
       }
    }
 
-   public async AllDeleted(req: CRequest, res: CResponse) {
+   public async getAllDeleted(req: CRequest, res: CResponse) {
       try {
+         const where = {deletedAt:Not(IsNull())}
+         const options: FindManyOptions<T | BaseInterface> = {
+            withDeleted: true, // force load relations include soft-deleted
+            where,
+          };
          const repo = await db.getRepository(entity);
-         const data = await repo.find();
+         const data = await repo.find(options);
          res.status(200).json(data);
       }
       catch (e) {
