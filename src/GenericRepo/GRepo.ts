@@ -43,12 +43,13 @@ class GRepo
    public async update(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.update(entity,{id: req.params.id}, req.body);
-         // await db.manager.save(data);
-         if(data?.affected == 0){
-            res.status(404).json({"message":"No data Updated"});
+         //  await db.manager.save(data);
+         if(data.affected !== 0){
+            res.status(200).json(req.body);
+            
          }
          else{
-            res.status(200).json(req.body);
+            res.status(404).json({"message":"No data Updated"});
          }
       }
       catch (e) {
