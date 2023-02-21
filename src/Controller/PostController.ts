@@ -11,7 +11,7 @@ const repo = GenericDomainService(Post);
 
 router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
     try {
-        const where = { id:1 };
+        const where = { id: 1 };
         const select = { post: true };
         const data = await repo.choiceSelect(where, select);
         await res.status(200).json(data);

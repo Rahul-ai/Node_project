@@ -73,7 +73,7 @@ class GRepo
             where,
           };
          const repo = await db.getRepository(entity);
-         const data = await repo.find(options);
+         const data = await repo.findAndCount(options);
          res.status(200).json(data);
       }
       catch (e) {
