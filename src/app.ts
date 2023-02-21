@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import { CRequest } from "./EntityInterfaces/Request";
 import { CResponse } from "./EntityInterfaces/Response";
-import { auth } from "./MiddelWare/Auth/Auth";
+import { auth } from "./MiddelWare/Authorize/Auth";
 
 const jwt = require("jsonwebtoken");
 const app: Application = express();
@@ -40,6 +40,7 @@ app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {
   res.json({ path: `${config.Api}/${req.file?.path}` });
 });
 
+// logIn and Generate token
 app.post("/login", (req: CRequest, res: CResponse) => {
   const user = {
     id: 1,
