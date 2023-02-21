@@ -5,6 +5,7 @@
    "main": "index.js",
    "scripts": {
       "build": "tsc -p .",
+      "start": "node build/app.js",
       "dev": "nodemon src/app.ts",
       "seed": "ts-node src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
