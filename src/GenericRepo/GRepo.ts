@@ -90,11 +90,9 @@ class GRepo
          res.status(200).json(data);
       }
       catch (e) {
-         console.log();
          res.status(500).json(e);
       }
    }
-
 
    // not handel Request and Response
    public async choiceSelect(where:{},select:{},relations=null){
