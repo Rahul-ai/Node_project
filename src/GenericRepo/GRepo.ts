@@ -6,8 +6,7 @@ import { BaseInterface } from "../EntityInterfaces/BaseInterface";
 
 export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface>)=>{
 class GRepo
-{
-   private 
+{ 
    public async fetchAll(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.find(entity);
