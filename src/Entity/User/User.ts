@@ -14,4 +14,7 @@ export class User extends BaseClass implements BaseInterface{
     @Column()
     age: number
 
+    @Column({select:false})
+    password: string
+
 }

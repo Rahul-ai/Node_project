@@ -1,6 +1,6 @@
 export interface BaseInterface{
     id: number
-    createdAt?:Date 
+    createdAt?: Date 
     updatedAt?: Date
     deletedAt?: Date
 } 
