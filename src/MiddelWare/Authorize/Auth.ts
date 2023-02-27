@@ -11,6 +11,7 @@ export const auth = (req, res, next) => {
             const verifiedPayload = jwt.verify(token[1], "mySecret");
             // can add id user is exist;
             req.user = verifiedPayload;
+            console.log(verifiedPayload);
             next();
         } catch (e) {
             res.status(500).json(e);

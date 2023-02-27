@@ -42,11 +42,8 @@ app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {
 
 // logIn and Generate token
 app.post("/login", (req: CRequest, res: CResponse) => {
-  const user = {
-    id: 1,
-    username: "rt878777@gmail.com",
-    role: "Admin",
-  };
+  const user = req.body
+  console.log(req.body)
   const token = jwt.sign(user, config.secretKey, { expiresIn: "1800s" });
   res.status(200).json({Token:token});
 });
