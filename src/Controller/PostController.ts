@@ -20,7 +20,8 @@ router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
     }
 });
 
+
+
 // common crud Operation
 controllerService(Post, router);
-
 module.exports = router;

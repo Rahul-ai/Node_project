@@ -8,7 +8,12 @@ import { GenericDomainService } from "../GenericRepo/GRepo";
 const router = express.Router();
 const repo = GenericDomainService(User);
 
+
+
+
+
+
+
 // Crud operation
 controllerService(User,router);
-
 module.exports = router;
