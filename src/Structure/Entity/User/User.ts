@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
-import { BaseClass } from "../../CommonEntity/BaseEntity"
-import { BaseInterface } from "../../CommonInterfaces/BaseInterface"
+import { BaseClass } from "../../../CommonEntity/BaseEntity"
+import { BaseInterface } from "../../../CommonEntity/Interfaces/BaseInterface"
 import { Role } from "./Role"
 
 @Entity()

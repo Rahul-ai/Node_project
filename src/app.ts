@@ -1,6 +1,6 @@
 import express, { Application } from "express";
-import { CRequest } from "./CommonInterfaces/Request";
-import { CResponse } from "./CommonInterfaces/Response";
+import { CRequest } from "./Modelhealper/Request";
+import { CResponse } from "./Modelhealper/Response";
 import { auth } from "./MiddelWare/Authorize/Auth";
 
 const jwt = require("jsonwebtoken");
@@ -16,9 +16,9 @@ var cors = require("cors");
 const config = require("./Configuration/Config");
 
 // Controller
-const usercontroller = require("./Controller/UserController");
-const PostController = require("./Controller/PostController");
-const RoleController = require("./Controller/RoleController");
+const usercontroller = require("./Controller/UserControllers/UserController");
+const PostController = require("./Controller/PostControllers/PostController");
+const RoleController = require("./Controller/UserControllers/RoleController");
 
 // MiddelWare lib
 app.use(cors());

@@ -10,7 +10,7 @@ import { DataSource } from "typeorm";
     database: "test",
     synchronize: true,
     logging: false, 
-    entities: ["src/Entity/**/*.ts"],
+    entities: ["src/Structure/Entity/**/*.ts"],
     subscribers: [],
     migrations: [],
 });
