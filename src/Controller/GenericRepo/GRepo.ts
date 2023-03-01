@@ -1,11 +1,11 @@
 import { EntityTarget, FindManyOptions, IsNull, Not } from "typeorm";
-import { CRequest } from "../Modelhealper/Request";
-import { CResponse } from "../Modelhealper/Response";
-import { db } from "../Configuration/dbConfig";
-import { BaseInterface } from "../CommonEntity/Interfaces/BaseInterface";
-import { isSoftDelete } from "../CommonEntity/Interfaces/IsSoftDelete";
+import { CRequest } from "../../Configuration/RequestDataTypes/Request";
+import { CResponse } from "../../Configuration/RequestDataTypes/Response";
+import { db } from "../../Configuration/Connection/dbConfig";
+import { BaseInterface } from "../../Structure/CommonEntity/Interfaces/BaseInterface";
+import { isSoftDelete } from "../../Structure/CommonEntity/Interfaces/IsSoftDelete";
 
-export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface & isSoftDelete>) => {
+export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete>) => {
    class GRepo {
       public async create(req: CRequest, res: CResponse) {
          try {
@@ -41,10 +41,10 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface &
 
       public async getAllDeleted(req: CRequest, res: CResponse) {
          try {
-            const where = { deletedAt: Not(IsNull()) }
+            const where = { deletedAt: Not(IsNull()) };
             const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
                // withDeleted: true, // force load relations include soft-deleted
-               where,
+               where
             };
             const repo = await db.getRepository(entity);
             const data = await repo.findAndCount(options);

@@ -1,4 +1,4 @@
-import { BaseInterface } from "../../../CommonEntity/Interfaces/BaseInterface"
+import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
 import { roleDTO } from "./roleDTO"
 
 export interface userDTO extends BaseInterface {

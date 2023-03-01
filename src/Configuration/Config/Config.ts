@@ -1,4 +1,4 @@
-import { configModel } from "../Modelhealper/configModel";
+import { configModel } from "./configModel";
 
 // Port configutation
 const config : configModel = {

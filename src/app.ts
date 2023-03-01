@@ -1,7 +1,7 @@
 import express, { Application } from "express";
-import { CRequest } from "./Modelhealper/Request";
-import { CResponse } from "./Modelhealper/Response";
-import { auth } from "./MiddelWare/Authorize/Auth";
+import { CRequest } from "./Configuration/RequestDataTypes/Request";
+import { CResponse } from "./Configuration/RequestDataTypes/Response";
+import { auth } from "./Configuration/MiddelWare/Authorize/Auth";
 
 const jwt = require("jsonwebtoken");
 const app: Application = express();
@@ -13,7 +13,7 @@ const morgan = require("morgan");
 var cors = require("cors");
 
 //Config file
-const config = require("./Configuration/Config");
+const config = require("./Configuration/Config/Config");
 
 // Controller
 const usercontroller = require("./Controller/UserControllers/UserController");
@@ -25,7 +25,7 @@ app.use(cors());
 app.use(morgan("tiny"));
 
 // MiddelWare for file upload
-const { upload, multiUpload } = require("./MiddelWare/fileUpload/FileUpload");
+const { upload, multiUpload } = require("./Configuration/MiddelWare/fileUpload/FileUpload");
 
 // Inbuild MiddelWare
 app.use("/src/Images", express.static("src/Images"));
