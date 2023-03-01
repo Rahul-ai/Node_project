@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { EntityTarget } from "typeorm";
-import { GenericDomainService } from "./GenericRepo/GRepo";
+import { GenericDomainService } from "../../GenericRepo/GRepo";
 
 export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     const repo = GenericDomainService(entity);
@@ -8,7 +8,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     //Get Requests
     router.get("/:id", repo.getById);
     router.get("/", repo.fetchAll); 
-    router.get("/getAllDelete", repo.getAllDeleted); 
+    // router.get("onlyDeleted", repo.getAllDeleted); 
     
     // Post Requests
     router.post("/", repo.create);

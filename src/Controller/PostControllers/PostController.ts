@@ -3,7 +3,7 @@ import { CRequest } from "../../Configuration/RequestDataTypes/Request";
 import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../CommonController/CommonControllerService";
 import { Post } from "../../Structure/Entity/Post/Post";
-import { GenericDomainService } from "../CommonController/GenericRepo/GRepo";
+import { GenericDomainService } from "../../GenericRepo/GRepo";
 import { User } from "../../Structure/Entity/User/User";
 
 const router = express.Router();
