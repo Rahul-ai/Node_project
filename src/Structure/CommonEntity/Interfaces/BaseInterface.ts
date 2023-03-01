@@ -1,5 +1,5 @@
 export interface BaseInterface{
-    id: number
+    id?: number
 
     createdAt?: Date 
     

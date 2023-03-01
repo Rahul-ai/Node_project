@@ -40,18 +40,20 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       };
 
       public async getAllDeleted(req: CRequest, res: CResponse) {
+         console.log("ghjgj");
          try {
-            const where = { deletedAt: Not(IsNull()) };
-            const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
-               // withDeleted: true, // force load relations include soft-deleted
-               where
-            };
-            const repo = await db.getRepository(entity);
-            const data = await repo.findAndCount(options);
+            
+            const where = { id:1 }; 
+            // const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
+            //    withDeleted: true, // force load relations include soft-deleted
+            //    where
+            // };
+            const data = await db.manager.findAndCount(entity,{where});
+            // const data = await repo.findAndCount({withDeleted:true});
             res.status(200).json(data);
          }
          catch (e) {
-            res.status(500).json(e);
+            res.status(500).json({"ghj":"bmn,"});
          }
       };
     
