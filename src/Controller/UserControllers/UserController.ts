@@ -9,11 +9,6 @@ const router = express.Router();
 const repo = GenericDomainService(User);
 
 
-
-
-
-
-
 // Crud operation
-// controllerService(User,router);
+controllerService(User,router);
 module.exports = router;
