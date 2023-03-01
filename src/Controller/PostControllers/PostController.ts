@@ -1,10 +1,10 @@
 import express from "express";
-import { CRequest } from "../CommonInterfaces/Request";
-import { CResponse } from "../CommonInterfaces/Response";
-import { controllerService } from "../ControllerService/ControllerService";
-import { Post } from "../Entity/Post/Post";
-import { GenericDomainService } from "../GenericRepo/GRepo";
-import { User } from "../Entity/User/User";
+import { CRequest } from "../../CommonInterfaces/Request";
+import { CResponse } from "../../CommonInterfaces/Response";
+import { controllerService } from "../../ControllerService/ControllerService";
+import { Post } from "../../Entity/Post/Post";
+import { GenericDomainService } from "../../GenericRepo/GRepo";
+import { User } from "../../Entity/User/User";
 
 const router = express.Router();
 const repo = GenericDomainService(Post);
