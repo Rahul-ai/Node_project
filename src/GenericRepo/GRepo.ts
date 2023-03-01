@@ -1,5 +1,5 @@
 import { EntityTarget, FindManyOptions, IsNull, Not } from "typeorm";
-import {CRequest} from "../Configuration/RequestDataTypes/Request"
+import { CRequest } from "../Configuration/RequestDataTypes/Request"
 import { CResponse } from "../Configuration/RequestDataTypes/Response";
 import { db } from "../Configuration/Connection/dbConfig";
 import { BaseInterface } from "../Structure/CommonEntity/Interfaces/BaseInterface";
@@ -17,7 +17,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
             res.status(500).json(e);
          }
       };
-      
+
       public async getById(req: CRequest, res: CResponse) {
          try {
             console.log(req.user)
@@ -39,24 +39,23 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          }
       };
 
-      // public async getAllDeleted(req: CRequest, res: CResponse) {
-      //    try {
-      //       console.log("hhghgj");
-      //       const where = { id:1 }; 
-      //       // const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
-      //       //    withDeleted: true, // force load relations include soft-deleted
-      //       //    where
-      //       // };
-            
-      //       const data = await db.manager.findAndCount(entity,{where});
-      //       // const data = await repo.findAndCount({withDeleted:true});
-      //       res.status(200).json(data);
-      //    }
-      //    catch (e) {
-      //       res.status(500).json(e);
-      //    }
-      // };
-    
+      public async getAllDeleted(req: CRequest, res: CResponse) {
+         try {
+            const where = { deletedAt: Not(IsNull()) };
+            const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
+               withDeleted: true, // force load relations include soft-deleted
+               where
+            };
+
+            const data = await db.manager.findAndCount(entity, options);
+            // const data = await repo.findAndCount({withDeleted:true});
+            res.status(200).json(data);
+         }
+         catch (e) {
+            res.status(500).json(e);
+         }
+      };
+
       public async update(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.update(entity, { id: req.params.id }, req.body);
