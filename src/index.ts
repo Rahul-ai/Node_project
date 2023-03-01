@@ -1,22 +1,35 @@
 import { db } from "./Configuration/dbConfig"
 import { Post } from "./Entity/Post/Post"
+import { Role } from "./Entity/User/Role"
 import { User } from "./Entity/User/User"
 
 db.initialize().then(async () => {
 
     console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await db.manager.save(user)
-    const post = new Post();
-    post.post = "new Post";
-    await db.manager.save(post);
-    console.log("Saved a new user with id: " + user.id)
+    const role = new Role()
+    role.RoleName ="Admin";
+    await db.manager.save(role);
 
+    const user = new User()
+    user.firstName = "Rahul"
+    user.lastName = "Thakur"
+    user.age = 22
+    user.role = role;
+    await db.manager.save(user);
+    const user1 = new User()
+    user1.firstName = "Rahul"
+    user1.lastName = ""
+    user1.age = 22
+    user1.role = role;
+    await db.manager.save(user1);
+//  await db.manager.delete(Role,{id:1});
+    // const post = new Post();
+    // post.post = "new Post";
+    // await db.manager.save(post);
+    console.log("Saved a new user with id: " + user.id)
     console.log("Loading users from the database...")
-    const users = await db.manager.find(Post)
+   
+    const users = await db.manager.find(User);
     console.log("Loaded users: ", users)
 
     console.log("Here you can setup and run express / fastify / any other framework.")

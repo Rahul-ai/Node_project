@@ -18,6 +18,7 @@ const config = require("./Configuration/Config");
 // Controller
 const usercontroller = require("./Controller/UserController");
 const PostController = require("./Controller/PostController");
+const RoleController = require("./Controller/RoleController");
 
 // MiddelWare lib
 app.use(cors());
@@ -34,6 +35,7 @@ app.use(express.json());
 // Assign Controllers
 app.use("/User", usercontroller);
 app.use("/Post", PostController);
+app.use("/Role", RoleController);
 
 // Common function
 app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {

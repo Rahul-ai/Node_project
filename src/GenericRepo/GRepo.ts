@@ -110,8 +110,8 @@ class GRepo
    }
 
    // not handel Request and Response
-   public async choiceSelect(where:{},select:{},relations:{}=null){
-      return await db.getRepository(entity).find({ where,select,relations });
+   public async choiceSelect(where:{},select:{}=null,relations:{}=null){
+      return await db.getRepository(entity).find({ where,relations ,select});
    }
 }
 return new GRepo();

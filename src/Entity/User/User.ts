@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
 import { BaseInterface } from "../../CommonInterfaces/BaseInterface"
 import { Role } from "./Role"
@@ -15,6 +15,7 @@ export class User extends BaseClass implements BaseInterface{
     @Column()
     age: number
 
-    @ManyToOne(()=>Role, role=>role.user, {onDelete:"SET NULL"} )
+    @ManyToOne(()=>Role, role=>role.users, {onDelete:"SET NULL"} )
+    @JoinColumn()
     role:Role
 }

@@ -11,6 +11,6 @@ export class Role extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     @Column()
     RoleName: string
     
-    @OneToMany(()=>User, user=>user.role)
-    user:User[]
+    @OneToMany(()=>User, users=>users.role)
+    users:User[]
 }
