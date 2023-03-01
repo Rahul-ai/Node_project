@@ -1,8 +1,8 @@
 import express from "express";
-import { CRequest } from "../EntityInterfaces/Request";
-import { CResponse } from "../EntityInterfaces/Response";
+import { CRequest } from "../CommonInterfaces/Request";
+import { CResponse } from "../CommonInterfaces/Response";
 import { controllerService } from "../ControllerService/ControllerService";
-import { Post } from "../Entity/User/Post";
+import { Post } from "../Entity/Post/Post";
 import { GenericDomainService } from "../GenericRepo/GRepo";
 import { User } from "../Entity/User/User";
 

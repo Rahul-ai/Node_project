@@ -7,6 +7,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
 
     router.get("/:id", repo.getById);
     router.delete("/:id", repo.Delete);
+    router.delete("/softDelete/:id", repo.softDelete);
     router.get("/", repo.fetchAll);
     router.post("/", repo.create);
     router.put("/:id", repo.update);   

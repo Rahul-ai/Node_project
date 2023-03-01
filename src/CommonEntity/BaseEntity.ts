@@ -1,4 +1,4 @@
-import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export abstract class BaseClass{
    @PrimaryGeneratedColumn()
@@ -9,7 +9,4 @@ export abstract class BaseClass{
 
    @UpdateDateColumn()
    updatedAt?: Date
-
-   @DeleteDateColumn()
-   deletedAt?: Date
 }

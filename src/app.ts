@@ -1,6 +1,6 @@
 import express, { Application } from "express";
-import { CRequest } from "./EntityInterfaces/Request";
-import { CResponse } from "./EntityInterfaces/Response";
+import { CRequest } from "./CommonInterfaces/Request";
+import { CResponse } from "./CommonInterfaces/Response";
 import { auth } from "./MiddelWare/Authorize/Auth";
 
 const jwt = require("jsonwebtoken");

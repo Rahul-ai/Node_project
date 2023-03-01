@@ -1,10 +1,11 @@
 import { EntityTarget, FindManyOptions, IsNull, Not} from "typeorm";
-import { CRequest } from "../EntityInterfaces/Request";
-import { CResponse } from "../EntityInterfaces/Response";
+import { CRequest } from "../CommonInterfaces/Request";
+import { CResponse } from "../CommonInterfaces/Response";
 import { db } from "../Configuration/dbConfig";
-import { BaseInterface } from "../EntityInterfaces/BaseInterface";
+import { BaseInterface } from "../CommonInterfaces/BaseInterface";
+import { isSoftDelete } from "../CommonInterfaces/IsSoftDelete";
 
-export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface>)=>{
+export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface & isSoftDelete>)=>{
 class GRepo
 { 
    public async fetchAll(req: CRequest, res: CResponse) {
@@ -55,9 +56,19 @@ class GRepo
       }
    }
 
-   public async Delete(req: CRequest, res: CResponse) {
+   public async softDelete(req: CRequest, res: CResponse) {
       try {
          const data = await db.manager.softDelete(entity,{id: req.params.id});
+         res.status(200).json(data);
+      }
+      catch (e) {
+         res.status(500).json(e);
+      }
+   }
+
+   public async Delete(req: CRequest, res: CResponse) {
+      try {
+         const data = await db.manager.delete(entity,{id: req.params.id});
          res.status(200).json(data);
       }
       catch (e) {
@@ -68,8 +79,8 @@ class GRepo
    public async getAllDeleted(req: CRequest, res: CResponse) {
       try {
          const where = {deletedAt:Not(IsNull())}
-         const options: FindManyOptions<T | BaseInterface> = {
-            withDeleted: true, // force load relations include soft-deleted
+         const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
+            // withDeleted: true, // force load relations include soft-deleted
             where,
           };
          const repo = await db.getRepository(entity);

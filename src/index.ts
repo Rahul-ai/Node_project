@@ -1,5 +1,5 @@
 import { db } from "./Configuration/dbConfig"
-import { Post } from "./Entity/User/Post"
+import { Post } from "./Entity/Post/Post"
 import { User } from "./Entity/User/User"
 
 db.initialize().then(async () => {
