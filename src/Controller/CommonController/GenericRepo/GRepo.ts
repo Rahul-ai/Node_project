@@ -1,9 +1,9 @@
 import { EntityTarget, FindManyOptions, IsNull, Not } from "typeorm";
-import { CRequest } from "../../Configuration/RequestDataTypes/Request";
-import { CResponse } from "../../Configuration/RequestDataTypes/Response";
-import { db } from "../../Configuration/Connection/dbConfig";
-import { BaseInterface } from "../../Structure/CommonEntity/Interfaces/BaseInterface";
-import { isSoftDelete } from "../../Structure/CommonEntity/Interfaces/IsSoftDelete";
+import { CRequest } from "../../../Configuration/RequestDataTypes/Request";
+import { CResponse } from "../../../Configuration/RequestDataTypes/Response";
+import { db } from "../../../Configuration/Connection/dbConfig";
+import { BaseInterface } from "../../../Structure/CommonEntity/Interfaces/BaseInterface";
+import { isSoftDelete } from "../../../Structure/CommonEntity/Interfaces/IsSoftDelete";
 
 export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete>) => {
    class GRepo {
