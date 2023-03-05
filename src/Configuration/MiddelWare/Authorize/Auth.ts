@@ -14,7 +14,6 @@ export const auth = (req:CRequest, res:CResponse, next:NextFunction) => {
             const verifiedPayload = jwt.verify(token[1],config.secretKey);
             // can add id user is exist;
             req.user = verifiedPayload;
-            console.log(verifiedPayload);
             next();
         } catch (e) {
             res.status(500).json(e);
