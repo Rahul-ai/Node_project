@@ -5,5 +5,5 @@ export interface userDTO extends BaseInterface {
     firstName: boolean & any
     lastName: boolean & any
     age: boolean & any
-    role:Partial<roleDTO>
+    role:Partial<roleDTO> & any
 }

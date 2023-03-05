@@ -4,5 +4,5 @@ import { userDTO } from "./userDTO"
 
 export interface roleDTO extends BaseInterface,isSoftDelete{
     RoleName?: boolean & any
-    users?:Partial<userDTO>
+    users?:Partial<userDTO> & any
 }

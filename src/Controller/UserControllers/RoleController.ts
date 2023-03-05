@@ -11,14 +11,16 @@ import { userDTO } from "../../Structure/DTOs/User/userDTO";
 const router = express.Router();
 const repo = GenericDomainService(Role);
 
-
 // coustomGet Eample:
 router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
     try {
         const where = {};
+
         const users:Partial<userDTO> = {firstName:true} 
         const select:Partial<roleDTO> = {RoleName:true,users:users};
-        const relations = {users:true};
+        
+        const relations:Partial<roleDTO> = {users:true};
+        
         const data = await repo.choiceSelect(where,select,relations);
         await res.status(200).json(data);
     } catch (err) {

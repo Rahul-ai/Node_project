@@ -94,44 +94,51 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
       public async withPagination(req: CRequest, res: CResponse) {
          try {
-            const repo = await db.getRepository(entity);
-            const data = await repo.findAndCount(this.pagination(req));
-            res.status(200).json(data);
+            const condition:FindManyOptions<T | BaseInterface | isSoftDelete>  = {
+               order: {
+                  id: 'DESC'
+               },
+               skip: (req?.body.limit * req?.body.page) - req?.body.limit,
+               take: req?.body.limit,
+            }
+            const repo = await db.getRepository(entity).findAndCount(condition);
+            res.status(200).json(repo);
          }
          catch (e) {
+            console.log(e);
             res.status(500).json(e);
          }
       };
 
+// ---------------------------------------------------------------------------------------------------------------------------
       // not handel Request and Response
       public async choiceSelect(where: {} = null, select: {} = null, relations: {} = null, req: CRequest = null) {
          if (req) {
-            return await db.getRepository(entity).findAndCount(this.pagination(req, where, select, relations));
+            return await db.getRepository(entity).findAndCount(this.Inpagination(req, where, select, relations));
          }
          return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
       };
 
-
-      private pagination(req: CRequest = null, where: {} = null, select: {} = null, relations: {} = null): {} {
-         return {
+      public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}): {} {
+         const condition = {
             where,
             relations,
             select,
             order: {
                id: 'DESC'
             },
+            skip: (req?.body.limit * req?.body.page) - req?.body.limit,
+            take: req?.body.limit,
+         }
+         return condition;
+      }
 
-            skip: (req?.body?.limit * req?.body?.page) - req?.body?.limit,
-            take: req?.body?.limit,
-         };
-      };
-
-      private SelectWithOutPagination(where: {} = null, select: {} = null, relations: {} = null) {
+      private SelectWithOutPagination(where: {}, select: {}, relations: {}) {
          return {
             where,
             relations,
             select,
-         };
+         }
       };
    }
    return new GRepo();
