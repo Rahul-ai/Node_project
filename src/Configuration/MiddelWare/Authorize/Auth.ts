@@ -3,7 +3,6 @@ import { NextFunction } from "express";
 import { config } from "../../Config/Config";
 import { CRequest } from "../../RequestDataTypes/Request";
 import { CResponse } from "../../RequestDataTypes/Response";
-// const config = require("../../Configuration/dbConfig");
 const jwt = require("jsonwebtoken");
 
 export const auth = (req:CRequest, res:CResponse, next:NextFunction) => {
