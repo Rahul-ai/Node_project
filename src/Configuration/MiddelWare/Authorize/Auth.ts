@@ -1,10 +1,12 @@
 import { JsonWebKey, JwkKeyExportOptions } from "crypto";
-import { Request, Response } from "express";
+import { NextFunction } from "express";
+import { CRequest } from "../../RequestDataTypes/Request";
+import { CResponse } from "../../RequestDataTypes/Response";
 const config = require("../../Configuration/dbConfig");
 
 const jwt = require("jsonwebtoken");
 
-export const auth = (req, res, next) => {
+export const auth = (req:CRequest, res:CResponse, next:NextFunction) => {
     if (req.headers["authorization"]) {
         try {
             const token = req.headers["authorization"].split(" ");
