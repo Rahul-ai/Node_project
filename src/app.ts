@@ -16,7 +16,6 @@ const morgan = require("morgan");
 // cross-origin-request handeler
 var cors = require("cors");
 
-
 // Controller
 const usercontroller = require("./Controller/UserControllers/UserController");
 const PostController = require("./Controller/PostControllers/PostController");
