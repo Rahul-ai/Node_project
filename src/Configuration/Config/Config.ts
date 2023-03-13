@@ -1,8 +1,10 @@
 import { configModel } from "./configModel";
 
 // Port configutation
-export const config : configModel = {
-    port:3007,
+const config : configModel = {
+    port:1337,
     secretKey:'mySecret',
-    Api:'http://localhost:3002',
+    Api:'http://localhost:1337',
 }
+
+module.exports = config;

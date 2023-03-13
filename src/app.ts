@@ -2,6 +2,10 @@ import express, { Application } from "express";
 import { CRequest } from "./Configuration/RequestDataTypes/Request";
 import { CResponse } from "./Configuration/RequestDataTypes/Response";
 import { auth } from "./Configuration/MiddelWare/Authorize/Auth";
+import { configModel } from "./Configuration/Config/configModel";
+
+//Config file
+const config:configModel = require("./Configuration/Config/Config");
 
 const jwt = require("jsonwebtoken");
 const app: Application = express();
@@ -12,8 +16,6 @@ const morgan = require("morgan");
 // cross-origin-request handeler
 var cors = require("cors");
 
-//Config file
-const config = require("./Configuration/Config/Config");
 
 // Controller
 const usercontroller = require("./Controller/UserControllers/UserController");
