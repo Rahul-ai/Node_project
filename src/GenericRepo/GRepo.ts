@@ -119,7 +119,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
       };
 
-      public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}): {} {
+      public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}):{} {
          const condition = {
             where,
             relations,

@@ -17,5 +17,5 @@ export class User extends BaseClass implements BaseInterface{
 
     @ManyToOne(()=>Role, role=>role.users, {onDelete:"SET NULL"} )
     @JoinColumn()
-    role:Role
+    role:Promise<Role>
 }
