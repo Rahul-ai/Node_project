@@ -112,7 +112,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
 // ---------------------------------------------------------------------------------------------------------------------------
       // not handel Request and Response
-      public async choiceSelect(where: {} = null, select: {} = null, relations: {} = null, req: CRequest = null) {
+      public async choiceSelect(req: CRequest = null, where: {} = null, select: {} = null, relations: {} = null ) {
          if (req) {
             return await db.getRepository(entity).findAndCount(this.Inpagination(req, where, select, relations));
          }
