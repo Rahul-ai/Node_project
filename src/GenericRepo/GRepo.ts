@@ -97,7 +97,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
             const condition:FindManyOptions<T | BaseInterface | isSoftDelete>  = {
                order: {
                   id: 'DESC'
-               },
+               },  
                skip: (req?.body.limit * req?.body.page) - req?.body.limit,
                take: req?.body.limit,
             }

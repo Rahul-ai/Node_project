@@ -21,7 +21,7 @@ router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
         
         const relations:Partial<roleDTO> = {users:true};
         
-        const data = await repo.choiceSelect(where,select,relations);
+        const data = await repo.choiceSelect(req,where,select,relations);
         await res.status(200).json(data);
     } catch (err) {
         res.status(500).json({err:"someThing wrong"});

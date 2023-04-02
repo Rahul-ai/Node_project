@@ -12,6 +12,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     
     // Post Requests
     router.post("/withPagination",repo.withPagination);
+    
     router.post("/", repo.create);
     
     //Put Requests
