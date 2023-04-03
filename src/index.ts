@@ -8,17 +8,20 @@ db.initialize().then(async () => {
     const post = new Post();
     post.post="post that do nothing in real world";
     await db.manager.save(post);
-//     console.log("Inserting a new user into the database...")
-//     const role = new Role()
-//     role.RoleName ="Admin";
-//     await db.manager.save(role);
+    console.log("Inserting a new user into the database...")
+    const role = new Role()
+    role.RoleName ="Admin";
+    await db.manager.save(role);
 
-//     const user = new User()
-//     user.firstName = "Rahul"
-//     user.lastName = "Thakur"
-//     user.age = 22
-//     user.role = role;
-//     await db.manager.save(user);
+    const user = new User()
+    user.firstName = "Rahul"
+    user.lastName = "Thakur"
+    user.age = 22
+    user.role = Promise.resolve(role);
+    
+    await db.manager.save(user);
+
+    console.log("Inserting done")
 //     const user1 = new User()
 //     user1.firstName = "Rahul"
 //     user1.lastName = ""
