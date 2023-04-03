@@ -1,6 +1,6 @@
 import { JsonWebKey, JwkKeyExportOptions } from "crypto";
 import { NextFunction } from "express";
-import { config } from "../../Config/Config";
+import { config} from "../../Config/Config";
 import { CRequest } from "../../RequestDataTypes/Request";
 import { CResponse } from "../../RequestDataTypes/Response";
 

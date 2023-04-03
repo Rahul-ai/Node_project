@@ -3,9 +3,7 @@ import { CRequest } from "./Configuration/RequestDataTypes/Request";
 import { CResponse } from "./Configuration/RequestDataTypes/Response";
 import { auth } from "./Configuration/MiddelWare/Authorize/Auth";
 import { configModel } from "./Configuration/Config/configModel";
-
-//Config file
-const config:configModel = require("./Configuration/Config/Config");
+import { config } from "./Configuration/Config/Config";
 
 const jwt = require("jsonwebtoken");
 const app: Application = express();
