@@ -20,8 +20,9 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
       public async getById(req: CRequest, res: CResponse) {
          try {
-            console.log(req.user)
+            
             const data = await db.manager.findOneBy(entity, { id: Number(req.params.id) });
+            console.log(data)
             res.status(200).json(data);
          }
          catch (e) {
@@ -59,7 +60,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       public async update(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.update(entity, { id: req.params.id }, req.body);
-            //  await db.manager.save(data);
+             
             if (data.affected !== 0) {
                res.status(200).json(req.body);
             }
