@@ -6,7 +6,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     const repo = GenericDomainService(entity);
 
     //Get Requests
-    router.get("/onlyDeleted", repo.getAllDeleted); 
+    router.post("/onlyDeleted", repo.getAllDeleted); 
     router.get("/:id", repo.getById);
     router.get("/", repo.fetchAll); 
     
