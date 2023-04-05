@@ -45,11 +45,15 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
             const where = { deletedAt: Not(IsNull()) };
             const options: FindManyOptions<T | BaseInterface | isSoftDelete> = {
                withDeleted: true, // force load relations include soft-deleted
-               where
+               where,
+               order: {
+                  id: 'DESC'
+               },  
+               skip: (req?.body.limit * req?.body.page) - req?.body.limit,
+               take: req?.body.limit,
             };
 
             const data = await db.manager.findAndCount(entity, options);
-            // const data = await repo.findAndCount({withDeleted:true});
             res.status(200).json(data);
          }
          catch (e) {
