@@ -1,7 +1,7 @@
 import { db } from "./Configuration/DataBaseConnection/dbConfig"
-import { Post } from "./Structure/Entity/Post/Post"
-import { Role } from "./Structure/Entity/User/Role"
-import { User } from "./Structure/Entity/User/User"
+import { Post } from "./DomainStructure/Entity/Post/Post"
+import { Role } from "./DomainStructure/Entity/User/Role"
+import { User } from "./DomainStructure/Entity/User/User"
 
 db.initialize().then(async () => {
 

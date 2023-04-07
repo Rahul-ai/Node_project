@@ -2,9 +2,9 @@ import express from "express";
 import { CRequest } from "../../Configuration/RequestDataTypes/Request";
 import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../CommonController/CommonControllerService";
-import { Post } from "../../Structure/Entity/Post/Post";
+import { Post } from "../../DomainStructure/Entity/Post/Post";
 import { GenericDomainService } from "../../GenericRepo/GRepo";
-import { User } from "../../Structure/Entity/User/User";
+import { User } from "../../DomainStructure/Entity/User/User";
 import { IsNull, Not } from "typeorm";
 
 const router = express.Router();

@@ -2,11 +2,11 @@ import express from "express";
 import { CRequest } from "../../Configuration/RequestDataTypes/Request";
 import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../CommonController/CommonControllerService";
-import { Post } from "../../Structure/Entity/Post/Post";
+import { Post } from "../../DomainStructure/Entity/Post/Post";
 import { GenericDomainService } from "../../GenericRepo/GRepo";
-import { Role } from "../../Structure/Entity/User/Role";
-import { roleDTO } from "../../Structure/DTOs/User/roleDTO";
-import { userDTO } from "../../Structure/DTOs/User/userDTO";
+import { Role } from "../../DomainStructure/Entity/User/Role";
+import { roleDTO } from "../../DomainStructure/DTOs/User/roleDTO";
+import { userDTO } from "../../DomainStructure/DTOs/User/userDTO";
 
 const router = express.Router();
 const repo = GenericDomainService(Role);
