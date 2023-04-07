@@ -1,4 +1,4 @@
-import { db } from "./Configuration/Connection/dbConfig"
+import { db } from "./Configuration/DataBaseConnection/dbConfig"
 import { Post } from "./Structure/Entity/Post/Post"
 import { Role } from "./Structure/Entity/User/Role"
 import { User } from "./Structure/Entity/User/User"

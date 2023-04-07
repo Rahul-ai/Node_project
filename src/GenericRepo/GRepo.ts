@@ -1,7 +1,7 @@
 import { EntityTarget, FindManyOptions, IsNull, Not } from "typeorm";
 import { CRequest } from "../Configuration/RequestDataTypes/Request"
 import { CResponse } from "../Configuration/RequestDataTypes/Response";
-import { db } from "../Configuration/Connection/dbConfig";
+import { db } from "../Configuration/DataBaseConnection/dbConfig";
 import { BaseInterface } from "../Structure/CommonEntity/Interfaces/BaseInterface";
 import { isSoftDelete } from "../Structure/CommonEntity/Interfaces/IsSoftDelete";
 import { SecurityLog } from "../Structure/Entity/SecurityLog/SecurityLog";
