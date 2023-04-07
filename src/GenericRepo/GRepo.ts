@@ -4,13 +4,19 @@ import { CResponse } from "../Configuration/RequestDataTypes/Response";
 import { db } from "../Configuration/Connection/dbConfig";
 import { BaseInterface } from "../Structure/CommonEntity/Interfaces/BaseInterface";
 import { isSoftDelete } from "../Structure/CommonEntity/Interfaces/IsSoftDelete";
+import { SecurityLog } from "../Structure/Entity/SecurityLog/SecurityLog";
 
-export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete>) => {
+export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete >, securityLog:EntityTarget<SecurityLog> = SecurityLog) => {
    class GRepo {
+      private x:T&Function;
+
       public async create(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.create(entity, req.body);
+            let ent = `${entity}`.split(" ");
+            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} create`, data:req.body}) 
             await db.manager.save(data);
+            await db.manager.save(log);
             res.status(200).json(data);
          }
          catch (e) {
@@ -22,7 +28,6 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          try {
             
             const data = await db.manager.findOneBy(entity, { id: Number(req.params.id) });
-            console.log(data)
             res.status(200).json(data);
          }
          catch (e) {
@@ -64,7 +69,9 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       public async update(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.update(entity, { id: req.params.id }, req.body);
-             
+            let ent = `${entity}`.split(" ");
+            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} updated`, data:req.body})
+            await db.manager.save(log);
             if (data.affected !== 0) {
                res.status(200).json(req.body);
             }
@@ -80,6 +87,9 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       public async softDelete(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.softDelete(entity, { id: req.params.id });
+            let ent = `${entity}`.split(" ");
+            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} softDeleted`, data:req.params.id })
+            await db.manager.save(log);
             res.status(200).json(data);
          }
          catch (e) {
@@ -90,6 +100,9 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       public async Delete(req: CRequest, res: CResponse) {
          try {
             const data = await db.manager.delete(entity, { id: req.params.id });
+            let ent = `${entity}`.split(" ");
+            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} updated`, data: req.params.id})
+            await db.manager.save(log);
             res.status(200).json(data);
          }
          catch (e) {

@@ -1,11 +1,13 @@
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
+import { WithSoftDeleted } from "../../CommonEntity/WithSoftDelete"
+import { isSoftDelete } from "../../CommonEntity/Interfaces/IsSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
 import { Role } from "./Role"
 import { SecurityLog } from "../SecurityLog/SecurityLog"
 
 @Entity()
-export class User extends BaseClass implements BaseInterface{
+export class User extends WithSoftDeleted implements BaseInterface,isSoftDelete{
 
     @Column()
     firstName: string
