@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
-import { WithSoftDeleted } from "../../CommonEntity/WithSoftDelete"
+import { WithSoftDeleted } from "../../CommonEntity/BaseEntityWithSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
 import { isSoftDelete } from "../../CommonEntity/Interfaces/IsSoftDelete"
 import { User } from "./User"

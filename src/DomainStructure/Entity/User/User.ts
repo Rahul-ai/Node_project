@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
-import { WithSoftDeleted } from "../../CommonEntity/WithSoftDelete"
+import { WithSoftDeleted } from "../../CommonEntity/BaseEntityWithSoftDelete"
 import { isSoftDelete } from "../../CommonEntity/Interfaces/IsSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
 import { Role } from "./Role"
@@ -16,9 +16,12 @@ export class User extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     lastName: string
 
     @Column()
+    email: string 
+
+    @Column({nullable:true})
     age: number
 
-    @ManyToOne(()=>Role, role=>role.users, {onDelete:"SET NULL"} )
+    @ManyToOne(()=>Role, role=>role.users, {onDelete:"SET NULL",nullable:true} )
     @JoinColumn()
     role:Promise<Role>
 

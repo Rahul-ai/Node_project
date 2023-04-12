@@ -1,5 +1,5 @@
 import { Entity, Column, BaseEntity } from "typeorm"
-import { WithSoftDeleted } from "../../CommonEntity/WithSoftDelete"
+import { WithSoftDeleted } from "../../CommonEntity/BaseEntityWithSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
 import { isSoftDelete } from "../../CommonEntity/Interfaces/IsSoftDelete"
 
