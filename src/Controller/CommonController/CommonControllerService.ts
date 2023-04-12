@@ -20,6 +20,7 @@ export const controllerService= <T>(entity:EntityTarget<T>,router:Router)=>{
     
     //Delete Requests
     router.delete("/softDelete/:id", repo.softDelete);
+    router.delete("/restore/:delId",repo.restore)
     router.delete("/:id", repo.Delete);
 
     return router;

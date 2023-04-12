@@ -43,8 +43,7 @@ app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {
 
 // logIn and Generate token
 app.post("/login", (req: CRequest, res: CResponse) => {
-  const user = req.body
-  console.log(req.body)
+  const user = req.body;
   const token = jwt.sign(user, config.secretKey, { expiresIn: "1800s" });
   res.status(200).json({Token:token});
 });

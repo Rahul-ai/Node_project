@@ -25,6 +25,17 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          }
       };
 
+      public async restore(req: CRequest, res:CResponse){
+         try{
+            await db.manager.restore(entity,req.params.delId)
+            res.status(200).json({msg:'success'});
+         }
+         catch(e){
+            console.log(e);
+            res.status(500).json(e);
+         }
+      }
+
       public async getById(req: CRequest, res: CResponse) {
          try {
             

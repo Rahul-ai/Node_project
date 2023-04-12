@@ -4,6 +4,6 @@ import { configModel } from "./configModel";
 export const config : configModel = {
     port:1500,
     secretKey:'mySecret',
-    Api:'http://localhost:1337',
+    Api:'http://localhost:1500',
 }
 
