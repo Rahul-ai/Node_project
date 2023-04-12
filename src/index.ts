@@ -17,7 +17,7 @@ db.initialize().then(async () => {
     user.firstName = "Rahul"
     user.lastName = "Thakur"
     user.age = 22
-    user.role = Promise.resolve(role);
+    user.roles = Promise.resolve([role]);
     
     await db.manager.save(user);
 

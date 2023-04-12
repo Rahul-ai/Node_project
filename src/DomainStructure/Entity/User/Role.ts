@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
 import { WithSoftDeleted } from "../../CommonEntity/BaseEntityWithSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
@@ -11,6 +11,6 @@ export class Role extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     @Column()
     RoleName: string
     
-    @OneToMany(()=>User, users=>users.role)
+    @ManyToMany(()=>User, users=>users.roles)
     users:Promise<User[]>
 }
