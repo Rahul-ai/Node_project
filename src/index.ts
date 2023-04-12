@@ -18,26 +18,6 @@ db.initialize().then(async () => {
     user.lastName = "Thakur"
     user.age = 22
     user.roles = Promise.resolve([role]);
-    
     await db.manager.save(user);
-
     console.log("Inserting done")
-//     const user1 = new User()
-//     user1.firstName = "Rahul"
-//     user1.lastName = ""
-//     user1.age = 22
-//     user1.role = role;
-//     await db.manager.save(user1);
-// //  await db.manager.delete(Role,{id:1});
-//     // const post = new Post();
-//     // post.post = "new Post";
-//     // await db.manager.save(post);
-//     console.log("Saved a new user with id: " + user.id)
-//     console.log("Loading users from the database...")
-   
-//     const users = await db.manager.find(User);
-//     console.log("Loaded users: ", users)
-
-//     console.log("Here you can setup and run express / fastify / any other framework.")
-
 }).catch(error => console.log(error))
