@@ -8,19 +8,14 @@ import { SecurityLog } from "../DomainStructure/Entity/SecurityLog/SecurityLog";
 
 export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete >, securityLog:EntityTarget<SecurityLog> = SecurityLog) => {
    class GRepo {
-      private x:T&Function;
 
       public async create(req: CRequest, res: CResponse) {
          try {
-            req.body.age = 22; 
-            console.log(req.body)
-            const data = await db.manager.create(entity, req.body);
-            await db.manager.save(data); 
-            
-            
+            const data = await db.manager.create(entity, req.body);            
             let ent = `${entity}`.split(" ");
             const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} create`, data:data}) 
-          
+            
+            await db.manager.save(data); 
             await db.manager.save(log);
             res.status(200).json(data);
          }
