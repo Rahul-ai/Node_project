@@ -4,9 +4,16 @@ import { CResponse } from "./Configuration/RequestDataTypes/Response";
 import { auth } from "./Configuration/MiddelWare/Authorize/Auth";
 import { configModel } from "./Configuration/Config/configModel";
 import { config } from "./Configuration/Config/Config";
+import { Server } from "socket.io";
 
 const jwt = require("jsonwebtoken");
 const app: Application = express();
+const io = new Server(2000,{cors:{origin:"*"}});
+
+
+io.on("connection",(socket)=>{
+  socket.emit("hello","world");
+})
 
 // Lib For Log
 const morgan = require("morgan");
@@ -35,6 +42,8 @@ app.use(express.json());
 app.use("/User", usercontroller);
 app.use("/Post", PostController);
 app.use("/Role", RoleController);
+
+
 
 // Common function
 app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {

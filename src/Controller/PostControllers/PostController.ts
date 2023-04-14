@@ -10,6 +10,7 @@ import { IsNull, Not } from "typeorm";
 const router = express.Router();
 const repo = GenericDomainService(Post);
 
+
 // common crud Operation
 controllerService(Post, router);
 module.exports = router;
