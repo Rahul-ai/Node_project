@@ -56,7 +56,6 @@ io.on("connection",(socket)=>{
   });
 
   socket.on("call-user",(data)=>{
-    console.log("socket");
     const {email, offer} = data;
     const fromEmail = socketToEmail.get(socket.id);
     const socketId = emailtoSocket.get(email);
