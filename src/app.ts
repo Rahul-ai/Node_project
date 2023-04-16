@@ -43,7 +43,6 @@ app.use("/User", usercontroller);
 app.use("/Post", PostController);
 app.use("/Role", RoleController);
 
-
 // socket connection
 io.on("connection",(socket)=>{
   socket.on("join-room",(data)=>{
