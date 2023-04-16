@@ -14,8 +14,6 @@ const io = new Server(2000,{cors:{origin:"*",methods:'*'}});
 const emailtoSocket = new Map();
 const socketToEmail = new Map();
 
-
-
 // Lib For Log
 const morgan = require("morgan");
 
@@ -45,12 +43,13 @@ app.use("/User", usercontroller);
 app.use("/Post", PostController);
 app.use("/Role", RoleController);
 
+
+// socket connection
 io.on("connection",(socket)=>{
   socket.on("join-room",(data)=>{
     const { roomId, email } = data;
     emailtoSocket.set(email,socket.id);
     socketToEmail.set(socket.id,email)
-    console.log(socketToEmail);
     socket.join(roomId);
     socket.emit("joined-room",{roomId});
     socket.broadcast.to(roomId).emit("User-joined",{email});
@@ -60,8 +59,6 @@ io.on("connection",(socket)=>{
     console.log("socket");
     const {email, offer} = data;
     const fromEmail = socketToEmail.get(socket.id);
-    console.log(fromEmail);
-    console.log(email);
     const socketId = emailtoSocket.get(email);
     socket.to(socketId).emit("incomming-call",{from:fromEmail,offer:offer});
   });
@@ -71,7 +68,6 @@ io.on("connection",(socket)=>{
     const socketId = emailtoSocket.get(email);
     socket.to(socketId).emit("call-accept",{ans});
   });
-
 });
 
 // Common function
