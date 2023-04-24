@@ -2,7 +2,6 @@ import express from "express";
 import { CRequest } from "../../Configuration/RequestDataTypes/Request";
 import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../CommonController/CommonControllerService";
-import { Post } from "../../DomainStructure/Entity/Post/Post";
 import { GenericDomainService } from "../../GenericRepo/GRepo";
 import { Role } from "../../DomainStructure/Entity/User/Role";
 import { roleDTO } from "../../DomainStructure/DTOs/User/roleDTO";

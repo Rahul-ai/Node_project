@@ -24,6 +24,7 @@ var cors = require("cors");
 const usercontroller = require("./Controller/UserControllers/UserController");
 const PostController = require("./Controller/PostControllers/PostController");
 const RoleController = require("./Controller/UserControllers/RoleController");
+const SecurityController = require("./Controller/LogController/LogController");
 
 // MiddelWare lib
 app.use(cors());
@@ -42,6 +43,7 @@ app.use(express.json());
 app.use("/User", usercontroller);
 app.use("/Post", PostController);
 app.use("/Role", RoleController);
+app.use("/Log",SecurityController);
 
 // socket connection
 io.on("connection",(socket)=>{
