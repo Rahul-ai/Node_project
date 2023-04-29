@@ -131,6 +131,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
       public async withPagination(req: CRequest, res: CResponse) {
          try {
             const condition:FindManyOptions<T | BaseInterface | isSoftDelete>  = {
+               where:req?.body?.where,
                order: {
                   id: 'DESC'
                },  
