@@ -15,13 +15,13 @@ export class User extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     @Column()
     lastName: string
 
-    @Column()
+    @Column({nullable:true})
     email: string 
 
     @Column({nullable:true})
     age: number
 
-    @ManyToMany(()=>Role, role=>role.users)
+    @ManyToMany(()=>Role, role=>role.users,{nullable:true})
     @JoinTable()
     roles:Promise<Role[]>
 
