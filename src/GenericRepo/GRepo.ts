@@ -6,16 +6,16 @@ import { BaseInterface } from "../DomainStructure/CommonEntity/Interfaces/BaseIn
 import { isSoftDelete } from "../DomainStructure/CommonEntity/Interfaces/IsSoftDelete";
 import { SecurityLog } from "../DomainStructure/Entity/SecurityLog/SecurityLog";
 
-export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete >, securityLog:EntityTarget<SecurityLog> = SecurityLog) => {
+export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete>, securityLog: EntityTarget<SecurityLog> = SecurityLog) => {
    class GRepo {
 
       public async create(req: CRequest, res: CResponse) {
          try {
-            const data = await db.manager.create(entity, req.body);            
+            const data = await db.manager.create(entity, req.body);
             let ent = `${entity}`.split(" ");
-            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} create`, data:data}) 
-            
-            await db.manager.save(data); 
+            const log = await db.manager.create(securityLog, { resion: `${ent[1].substring(0, ent[1].length - 2)} create`, data: data })
+
+            await db.manager.save(data);
             await db.manager.save(log);
             res.status(200).json(data);
          }
@@ -25,12 +25,12 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          }
       };
 
-      public async restore(req: CRequest, res:CResponse){
-         try{
-            await db.manager.restore(entity,req.params.delId)
-            res.status(200).json({msg:'success'});
+      public async restore(req: CRequest, res: CResponse) {
+         try {
+            await db.manager.restore(entity, req.params.delId)
+            res.status(200).json({ msg: 'success' });
          }
-         catch(e){
+         catch (e) {
             console.log(e);
             res.status(500).json(e);
          }
@@ -38,7 +38,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
       public async getById(req: CRequest, res: CResponse) {
          try {
-            
+
             const data = await db.manager.findOneBy(entity, { id: Number(req.params.id) });
             res.status(200).json(data);
          }
@@ -67,7 +67,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
                where,
                order: {
                   id: 'DESC'
-               },  
+               },
                skip: (req?.body.limit * req?.body.page) - req?.body.limit,
                take: req?.body.limit,
             };
@@ -85,7 +85,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          try {
             const data = await db.manager.update(entity, { id: req.params.id }, req.body);
             let ent = `${entity}`.split(" ");
-            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} updated`, data:req.body})
+            const log = await db.manager.create(securityLog, { resion: `${ent[1].substring(0, ent[1].length - 2)} updated`, data: req.body })
             await db.manager.save(log);
             if (data.affected !== 0) {
                res.status(200).json(req.body);
@@ -104,7 +104,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          try {
             const data = await db.manager.softDelete(entity, { id: req.params.id });
             let ent = `${entity}`.split(" ");
-            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} softDeleted`, data:req.params.id })
+            const log = await db.manager.create(securityLog, { resion: `${ent[1].substring(0, ent[1].length - 2)} softDeleted`, data: req.params.id })
             await db.manager.save(log);
             res.status(200).json(data);
          }
@@ -118,7 +118,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          try {
             const data = await db.manager.delete(entity, { id: req.params.id });
             let ent = `${entity}`.split(" ");
-            const log = await db.manager.create(securityLog,{resion:`${ent[1].substring(0,ent[1].length-2)} updated`, data: req.params.id})
+            const log = await db.manager.create(securityLog, { resion: `${ent[1].substring(0, ent[1].length - 2)} updated`, data: req.params.id })
             await db.manager.save(log);
             res.status(200).json(data);
          }
@@ -130,16 +130,28 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
       public async withPagination(req: CRequest, res: CResponse) {
          try {
-            const condition:FindManyOptions<T | BaseInterface | isSoftDelete>  = {
-               where:req?.body?.where,
-               order: {
-                  id: 'DESC'
-               },  
-               skip: (req?.body.limit * req?.body.page) - req?.body.limit,
-               take: req?.body.limit,
+            if (req?.body.limit == "-1") {
+               const condition: FindManyOptions<T | BaseInterface | isSoftDelete> = {
+                  where: req?.body?.where,
+                  order: {
+                     id: 'DESC'
+                  },
+               }
+               const repo = await db.getRepository(entity).findAndCount(condition);
+               res.status(200).json(repo);
             }
-            const repo = await db.getRepository(entity).findAndCount(condition);
-            res.status(200).json(repo);
+            else {
+               const condition: FindManyOptions<T | BaseInterface | isSoftDelete> = {
+                  where: req?.body?.where,
+                  order: {
+                     id: 'DESC'
+                  },
+                  skip: (req?.body.limit * req?.body.page) - req?.body.limit,
+                  take: req?.body.limit,
+               }
+               const repo = await db.getRepository(entity).findAndCount(condition);
+               res.status(200).json(repo);
+            }
          }
          catch (e) {
             console.log(e);
@@ -147,16 +159,16 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          }
       };
 
-// ---------------------------------------------------------------------------------------------------------------------------
+      // ---------------------------------------------------------------------------------------------------------------------------
       // not handel Request and Response
-      public async choiceSelect(req: CRequest = null, where: {} = null, select: {} = null, relations: {} = null ) {
+      public async choiceSelect(req: CRequest = null, where: {} = null, select: {} = null, relations: {} = null) {
          if (req) {
             return await db.getRepository(entity).findAndCount(this.Inpagination(req, where, select, relations));
          }
          return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
       };
 
-      public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}):{} {
+      public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}): {} {
          const condition = {
             where,
             relations,
