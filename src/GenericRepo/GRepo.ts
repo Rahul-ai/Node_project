@@ -5,6 +5,7 @@ import { db } from "../Configuration/DataBaseConnection/dbConfig";
 import { BaseInterface } from "../DomainStructure/CommonEntity/Interfaces/BaseInterface";
 import { isSoftDelete } from "../DomainStructure/CommonEntity/Interfaces/IsSoftDelete";
 import { SecurityLog } from "../DomainStructure/Entity/SecurityLog/SecurityLog";
+import { GLike } from "./QueryBuilder";
 
 export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface | isSoftDelete>, securityLog: EntityTarget<SecurityLog> = SecurityLog) => {
    class GRepo {
@@ -142,7 +143,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
             }
             else {
                const condition: FindManyOptions<T | BaseInterface | isSoftDelete> = {
-                  where: req?.body?.where,
+                  where: GLike(req?.body?.where),
                   order: {
                      id: 'DESC'
                   },
@@ -161,11 +162,12 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
 
       // ---------------------------------------------------------------------------------------------------------------------------
       // not handel Request and Response
-      public async choiceSelect(req: CRequest = null, where: {} = null, select: {} = null, relations: {} = null) {
+      public async choiceSelect(where: {} = null, select: {} = null, relations: {} = null,req: CRequest = null) {
          if (req) {
             return await db.getRepository(entity).findAndCount(this.Inpagination(req, where, select, relations));
          }
-         return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
+        
+            return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
       };
 
       public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}): {} {
