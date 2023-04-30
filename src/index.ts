@@ -17,7 +17,7 @@ db.initialize().then(async () => {
     user.firstName = "Rahul"
     user.lastName = "Thakur"
     user.age = 22
-    user.roles = Promise.resolve([role]);
+    user.roles = [role];
     await db.manager.save(user);
     console.log("Inserting done")
 }).catch(error => console.log(error))

@@ -15,5 +15,5 @@ export class SecurityLog extends WithSoftDeleted implements BaseInterface,isSoft
     data
     
     @ManyToOne(()=>User, users=>users.id,{nullable:true})
-    users:Promise<User[]>
+    users:User[]
 }

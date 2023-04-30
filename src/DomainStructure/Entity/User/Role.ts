@@ -11,5 +11,5 @@ export class Role extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     RoleName: string
     
     @ManyToMany(()=>User, users=>users.roles)
-    users:Promise<User[]>
+    users:User[]
 }
