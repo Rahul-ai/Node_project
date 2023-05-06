@@ -13,7 +13,11 @@ export class SecurityLog extends WithSoftDeleted implements BaseInterface,isSoft
 
     @Column('simple-json',{nullable:true})
     data
-    
-    @ManyToOne(()=>User, users=>users.id,{nullable:true})
-    users:User[]
+
+    @Column()
+    userId:number
+
+    @OneToMany(()=>User, users=>users.id,{nullable:true})
+    @Column({name:'userId'})
+    users:User
 }

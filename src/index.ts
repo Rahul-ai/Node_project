@@ -1,3 +1,4 @@
+import { Any } from "typeorm"
 import { db } from "./Configuration/DataBaseConnection/dbConfig"
 import { Post } from "./DomainStructure/Entity/Post/Post"
 import { Role } from "./DomainStructure/Entity/User/Role"
@@ -9,15 +10,22 @@ db.initialize().then(async () => {
     post.post="post that do nothing in real world";
     await db.manager.save(post);
     console.log("Inserting a new user into the database...")
-    const role = new Role()
+    let role:any = new Role()
     role.RoleName ="Admin";
+    await db.manager.save(role);
+    role = new Role()
+    role.RoleName ="Teacher";
+    await db.manager.save(role);
+    role = new Role()
+    role.RoleName ="student";
     await db.manager.save(role);
 
     const user = new User()
     user.firstName = "Rahul"
     user.lastName = "Thakur"
     user.age = 22
-    user.roles = [role];
-    await db.manager.save(user);
+    user.roleId = 1;
+    await db.manager.save(user); 
     console.log("Inserting done")
 }).catch(error => console.log(error))
+ 

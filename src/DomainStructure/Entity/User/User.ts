@@ -21,11 +21,13 @@ export class User extends WithSoftDeleted implements BaseInterface,isSoftDelete{
     @Column({nullable:true})
     age: number
 
-    @ManyToMany(()=>Role, role=>role.users,{nullable:true})
-    @JoinTable()
-    roles:Role[]
+    @Column({nullable:true})
+    roleId:number
+ 
+    @ManyToOne(()=>Role, role=>role.users,{nullable:true})
+    @JoinColumn({name:'roleId'})
+    roles:Role
 
     @OneToMany(()=>SecurityLog, securityLog=>securityLog.users, {onDelete:"SET NULL",nullable:true} )
-    @JoinColumn()
     securityLog:SecurityLog[]
 }
