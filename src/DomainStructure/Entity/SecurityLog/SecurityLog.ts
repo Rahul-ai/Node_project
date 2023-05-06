@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, GeoJSON, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, GeoJSON, ManyToOne, JoinColumn } from "typeorm"
 import { BaseClass } from "../../CommonEntity/BaseEntity"
 import { WithSoftDeleted } from "../../CommonEntity/BaseEntityWithSoftDelete"
 import { BaseInterface } from "../../CommonEntity/Interfaces/BaseInterface"
@@ -14,10 +14,10 @@ export class SecurityLog extends WithSoftDeleted implements BaseInterface,isSoft
     @Column('simple-json',{nullable:true})
     data
 
-    @Column()
-    userId:number
+    @Column({nullable:true})
+    userId:number 
 
-    @OneToMany(()=>User, users=>users.id,{nullable:true})
-    @Column({name:'userId'})
-    users:User
+    @ManyToOne(()=>User, user=>user.securityLogs,{nullable:true}) 
+    @JoinColumn({name:'userId'})
+    user:User
 }

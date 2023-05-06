@@ -26,8 +26,8 @@ export class User extends WithSoftDeleted implements BaseInterface,isSoftDelete{
  
     @ManyToOne(()=>Role, role=>role.users,{nullable:true})
     @JoinColumn({name:'roleId'})
-    roles:Role
+    role:Role
 
-    @OneToMany(()=>SecurityLog, securityLog=>securityLog.users, {onDelete:"SET NULL",nullable:true} )
-    securityLog:SecurityLog[]
+    @OneToMany(()=>SecurityLog, securityLog=>securityLog.user)
+    securityLogs:SecurityLog[]
 }
