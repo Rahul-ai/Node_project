@@ -4,10 +4,8 @@ import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../../CommonController/CommonControllerService";
 import { GenericDomainService } from "../../GenericRepo/GRepo";
 import { Role } from "../../DomainStructure/Entity/User/Role";
-import { roleDTO } from "../../DomainStructure/DTOs/User/roleDTO";
-import { userDTO } from "../../DomainStructure/DTOs/User/userDTO";
-import { Like } from "typeorm";
-import { User } from "../../DomainStructure/Entity/User/User";
+import { FindOptionsRelations,FindOptionsSelectProperty,FindOptionsSelect, Like } from "typeorm";
+import { UserRole } from "../../DomainStructure/Entity/User/UserRole";
 
 const router = express.Router();
 const repo = GenericDomainService(Role);
@@ -15,25 +13,16 @@ const repo = GenericDomainService(Role);
 // coustomGet Eample:
 router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
     try {
-        const user:Partial<userDTO> = {firstName:true,id:true} 
-        const select:Partial<roleDTO> = {users:user};
-     
-        const relations:any = ["users"];
-        
-        const data:any = await repo.choiceSelect(null,select,relations);
-        await res.status(200).json([data]);
+        const user:FindOptionsSelect<UserRole> = {user_id:true,user:{name:true}}; 
+        const select:FindOptionsSelectProperty<Role> = {userRoles:user,RoleName:true};
+        const relations:FindOptionsRelations<Role> = {userRoles:{user:true}};
+        const data:any = await repo.choiceSelect(select,relations);
+        await res.status(200).json(data);
     } catch (err) {
-        res.status(500).json({err:"someThing wrong"});
+        console.log(err);
+        res.status(500).json({err:err});
     }
 });
-
-const querybuilder = (data) =>{
-    let a = Object.keys(data).map((key)=>{
-        data[key] = Like(`%${data[key]}%`)
-    });
-    // console.log(a);
-    return data;
-}
 
 // common crud Operation
 controllerService(Role, router);
