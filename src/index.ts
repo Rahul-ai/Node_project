@@ -4,6 +4,8 @@ import { Post } from "./DomainStructure/Entity/Post/Post"
 import { Role } from "./DomainStructure/Entity/User/Role"
 import { User } from "./DomainStructure/Entity/User/User"
 import { userView } from "./DomainStructure/Entity/User/userView"
+import { SecurityLog } from "./DomainStructure/Entity/SecurityLog/SecurityLog"
+import { SecurityLogView } from "./DomainStructure/Entity/SecurityLog/SecurityLogView"
 
 db.initialize().then(async () => {
 
@@ -20,7 +22,7 @@ db.initialize().then(async () => {
     // role = new Role()
     // role.RoleName ="student";
     // await db.manager.save(role);
-    const postCategories = await db.manager.find(userView)
+    const postCategories = await db.manager.find(SecurityLogView)
     console.log(postCategories);
     // const user = new User()
     // user.firstName = "Rahul"
