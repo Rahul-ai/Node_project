@@ -14,4 +14,4 @@ const repo = GenericDomainService(Post);
 
 // common crud Operation
 controllerService(SecurityLog, router);
-module.exports = router;
+export const logController = router;

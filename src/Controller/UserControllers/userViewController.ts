@@ -2,15 +2,13 @@ import express from "express";
 import { CRequest } from "../../Configuration/RequestDataTypes/Request";
 import { CResponse } from "../../Configuration/RequestDataTypes/Response";
 import { controllerService } from "../../CommonController/CommonControllerService";
-import { Post } from "../../DomainStructure/Entity/Post/Post";
-import { GenericDomainService } from "../../GenericRepo/GRepo";
 import { User } from "../../DomainStructure/Entity/User/User";
-import { IsNull, Not } from "typeorm";
+import { GenericDomainService } from "../../GenericRepo/GRepo";
+import { userView } from "../../DomainStructure/Entity/User/userView";
 
 const router = express.Router();
-const repo = GenericDomainService(Post);
+const repo = GenericDomainService(userView);
 
-
-// common crud Operation
-controllerService(Post, router);
-export const postController = router;
+// Crud operation
+controllerService(userView,router);
+export const userviewController = router;

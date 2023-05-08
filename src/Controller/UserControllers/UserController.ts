@@ -24,4 +24,4 @@ router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
 
 // Crud operation
 controllerService(User,router);
-module.exports = router;
+export const userController = router;

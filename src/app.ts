@@ -21,10 +21,11 @@ const morgan = require("morgan");
 var cors = require("cors");
 
 // Controller
-const usercontroller = require("./Controller/UserControllers/UserController");
-const PostController = require("./Controller/PostControllers/PostController");
-const RoleController = require("./Controller/UserControllers/RoleController");
-const SecurityController = require("./Controller/LogController/LogController");
+import { userviewController } from "./Controller/UserControllers/userViewController";
+import { userController } from "./Controller/UserControllers/UserController";
+import { postController } from "./Controller/PostControllers/PostController";
+import { roleController } from "./Controller/UserControllers/RoleController";
+import { logController } from "./Controller/LogController/LogController";
 
 // MiddelWare lib
 app.use(cors());
@@ -40,10 +41,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Assign Controllers
-app.use("/User", usercontroller);
-app.use("/Post", PostController);
-app.use("/Role", RoleController);
-app.use("/Log",SecurityController);
+app.use("/User", userController);
+app.use("/userView", userviewController);
+app.use("/Post", postController);
+app.use("/Role", roleController);
+app.use("/Log",logController);
 
 // socket connection
 io.on("connection",(socket)=>{
