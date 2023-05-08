@@ -133,7 +133,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
          try {
             if (req?.body.limit == "-1") {
                const condition: FindManyOptions<T | BaseInterface | isSoftDelete> = {
-                  where: req?.body?.where,
+                  where: GLike(req?.body?.where),
                   order: {
                      id: 'DESC'
                   },
@@ -167,7 +167,7 @@ export const GenericDomainService = <T>(entity: EntityTarget<T | BaseInterface |
             return await db.getRepository(entity).findAndCount(this.Inpagination(req, where, select, relations));
          }
         
-            return await db.getRepository(entity).findAndCount(this.SelectWithOutPagination(where, select, relations));
+            return await db.getRepository(entity).find(this.SelectWithOutPagination(where, select, relations));
       };
 
       public Inpagination(req: CRequest, where: {} = {}, select: {} = {}, relations: {} = {}): {} {
