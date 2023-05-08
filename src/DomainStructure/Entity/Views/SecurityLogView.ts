@@ -1,5 +1,5 @@
 import { DataSource, ViewColumn, ViewEntity } from "typeorm";
-import { SecurityLog } from "./SecurityLog";
+import { SecurityLog } from "../SecurityLog/SecurityLog";
 
 @ViewEntity({expression:(datastore:DataSource)=> datastore
     .createQueryBuilder(SecurityLog,"securityLog")
@@ -21,7 +21,7 @@ UserId:number
 UserName:string
 
 @ViewColumn()
-data:JSON
+data
 
 @ViewColumn()
 resion:string

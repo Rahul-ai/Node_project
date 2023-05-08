@@ -1,5 +1,5 @@
 import { DataSource, ViewColumn, ViewEntity } from "typeorm";
-import { User } from "./User";
+import { User } from "../User/User";
 
 @ViewEntity({
     expression:(dataStore:DataSource) => dataStore
