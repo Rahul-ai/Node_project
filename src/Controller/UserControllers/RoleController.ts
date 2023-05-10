@@ -14,7 +14,7 @@ const repo = GenericDomainService(Role);
 router.get("/coustomGet", async (req: CRequest, res: CResponse) => {
     try {
         const user:FindOptionsSelect<UserRole> = {user_id:true,user:{name:true}}; 
-        const select:FindOptionsSelectProperty<Role> = {userRoles:user,RoleName:true};
+        const select:FindOptionsSelect<Role> = {userRoles:user,RoleName:true};
         const relations:FindOptionsRelations<Role> = {userRoles:{user:true}};
         const data:any = await repo.choiceSelect(select,relations);
         await res.status(200).json(data);
