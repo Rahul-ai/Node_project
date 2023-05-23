@@ -48,29 +48,29 @@ app.use("/Role", roleController);
 app.use("/Log",logController);
 
 // socket connection
-io.on("connection",(socket)=>{
-  socket.on("join-room",(data)=>{
-    const { roomId, email } = data;
-    emailtoSocket.set(email,socket.id);
-    socketToEmail.set(socket.id,email)
-    socket.join(roomId);
-    socket.emit("joined-room",{roomId});
-    socket.broadcast.to(roomId).emit("User-joined",{email});
-  });
+// io.on("connection",(socket)=>{
+//   socket.on("join-room",(data)=>{
+//     const { roomId, email } = data;
+//     emailtoSocket.set(email,socket.id);
+//     socketToEmail.set(socket.id,email)
+//     socket.join(roomId);
+//     socket.emit("joined-room",{roomId});
+//     socket.broadcast.to(roomId).emit("User-joined",{email});
+//   });
 
-  socket.on("call-user",(data)=>{
-    const {email, offer} = data;
-    const fromEmail = socketToEmail.get(socket.id);
-    const socketId = emailtoSocket.get(email);
-    socket.to(socketId).emit("incomming-call",{from:fromEmail,offer:offer});
-  });
+//   socket.on("call-user",(data)=>{
+//     const {email, offer} = data;
+//     const fromEmail = socketToEmail.get(socket.id);
+//     const socketId = emailtoSocket.get(email);
+//     socket.to(socketId).emit("incomming-call",{from:fromEmail,offer:offer});
+//   });
 
-  socket.on("call-accepted",(data)=>{
-    const {email,ans} = data;
-    const socketId = emailtoSocket.get(email);
-    socket.to(socketId).emit("call-accept",{ans});
-  });
-});
+//   socket.on("call-accepted",(data)=>{
+//     const {email,ans} = data;
+//     const socketId = emailtoSocket.get(email);
+//     socket.to(socketId).emit("call-accept",{ans});
+//   });
+// });
 
 // Common function
 app.post("/upload", upload.single("file"), (req: CRequest, res: CResponse) => {

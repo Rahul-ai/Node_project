@@ -3,9 +3,9 @@ import { db } from "./Configuration/DataBaseConnection/dbConfig"
 import { Post } from "./DomainStructure/Entity/Post/Post"
 import { Role } from "./DomainStructure/Entity/User/Role"
 import { User } from "./DomainStructure/Entity/User/User"
-import { userView } from "./DomainStructure/Entity/Views/userView"
+import { userView } from "./DomainStructure/Entity/TableViews/userView"
 import { SecurityLog } from "./DomainStructure/Entity/SecurityLog/SecurityLog"
-import { SecurityLogView } from "./DomainStructure/Entity/Views/SecurityLogView"
+import { SecurityLogView } from "./DomainStructure/Entity/TableViews/SecurityLogView"
 
 db.initialize().then(async () => {
 
