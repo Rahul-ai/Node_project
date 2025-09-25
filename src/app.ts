@@ -25,7 +25,9 @@ import { userviewController } from "./Controller/UserControllers/userViewControl
 import { userController } from "./Controller/UserControllers/UserController";
 import { roleController } from "./Controller/UserControllers/RoleController";
 import { logController } from "./Controller/LogController/LogController";
-
+import { projectController } from "./Controller/projectController/projectController";
+import { websiteSectionController } from "./Controller/webSiteSectionController/webSiteSectionController";
+import { pageInfoController } from "./Controller/pageInfoController/pageInfoController";
 // MiddelWare lib
 app.use(cors());
 app.use(bodyParser.json());
@@ -44,6 +46,9 @@ app.use("/User", userController);
 app.use("/userView", userviewController);
 app.use("/Role", roleController);
 app.use("/Log",logController);
+app.use("/project",projectController);
+app.use("/websitesection",websiteSectionController);
+app.use("/pageInfo",pageInfoController);
 
 // socket connection
 // io.on("connection",(socket)=>{
