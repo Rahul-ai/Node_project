@@ -1,13 +1,15 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Post } from "../../DomainStructure/Entity/Post/Post";
 import { Role } from "../../DomainStructure/Entity/User/Role";
 import { User } from "../../DomainStructure/Entity/User/User";
 import { UserRole } from "../../DomainStructure/Entity/User/UserRole";
 import { SecurityLog } from "../../DomainStructure/Entity/SecurityLog/SecurityLog";
 import { SecurityLogView } from "../../DomainStructure/Entity/TableViews/SecurityLogView";
+import { project } from "../../DomainStructure/Entity/Project/project";
+import { PageInfo } from "../../DomainStructure/Entity/PageInfo/pageInfo";
+import { websiteSection } from "../../DomainStructure/Entity/websiteSection/websiteSection";
 
-let EntityList = [Post,Role,User,UserRole,SecurityLog,SecurityLogView];
+let EntityList = [project,PageInfo,websiteSection,Role,User,UserRole,SecurityLog,SecurityLogView];
 
  let options = new DataSource({
     type: "mysql",

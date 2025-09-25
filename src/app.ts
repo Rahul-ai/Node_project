@@ -23,7 +23,6 @@ var cors = require("cors");
 // Controller
 import { userviewController } from "./Controller/UserControllers/userViewController";
 import { userController } from "./Controller/UserControllers/UserController";
-import { postController } from "./Controller/PostControllers/PostController";
 import { roleController } from "./Controller/UserControllers/RoleController";
 import { logController } from "./Controller/LogController/LogController";
 
@@ -43,7 +42,6 @@ app.use(express.json());
 // Assign Controllers
 app.use("/User", userController);
 app.use("/userView", userviewController);
-app.use("/Post", postController);
 app.use("/Role", roleController);
 app.use("/Log",logController);
 
